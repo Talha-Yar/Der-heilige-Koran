@@ -55,6 +55,18 @@ verses.forEach((v,i)=>{const a=el('article');a.id='vers-'+v.id.replace(':','-');
  ['At-Tabari (gest. 310 n. H.)','Jami al-Bayan an Ta’wil Ay al-Qur’an','Auslegung zu Sure Al-Fatiha 1:2']
  ].forEach(([author,work,reference])=>{const li=el('li');li.append(el('strong','',author),document.createTextNode(', '),el('em','',work),document.createTextNode(', '+reference+'.'));list.append(li)});
  sources.append(list);sources.append(el('p','source-caveat','Quellenangaben wie vom Nutzer bereitgestellt. Konkrete Ausgaben und Seitenzahlen wurden nicht genannt und nicht unabhängig verifiziert.'));panel.append(sources);
+}else if(v.id==='1:3'){
+ panel.append(el('p','tafsir-intro','In diesem Vers beschreibt Allah sich mit zwei Seiner schönsten Namen: Ar-Rahman und Ar-Rahim. Beide stammen aus dem arabischen Wortstamm Rahma (Barmherzigkeit), betonen jedoch unterschiedliche Aspekte Seiner Barmherzigkeit.'));
+ const sections=[
+ ['Ar-Rahman (الرَّحْمَٰنِ) · Der Allerbarmer','Dieser Name beschreibt Allahs umfassende und grenzenlose Barmherzigkeit, die sich auf Seine gesamte Schöpfung erstreckt.','Allah schenkt Menschen und Tieren Leben, Nahrung, Wasser, Gesundheit und Versorgung. Seine weltlichen Gaben erreichen sowohl Gläubige als auch Nichtgläubige.'],
+ ['Ar-Rahim (الرَّحِيمِ) · Der Barmherzige','Dieser Name beschreibt Allah als denjenigen, der Seine Barmherzigkeit erweist.','Viele Gelehrte betonen, dass Ar-Rahim insbesondere auf Allahs besondere Barmherzigkeit gegenüber den Gläubigen hinweist, vor allem im Jenseits.'],
+ ['Die tiefere Bedeutung','Allah ist nicht nur der mächtige Schöpfer und Herr der Welten, sondern auch unendlich barmherzig.','Seine Herrschaft beruht auf vollkommener Weisheit und Gerechtigkeit. Seine Barmherzigkeit gibt uns Hoffnung, selbst wenn wir Fehler machen oder schwere Zeiten durchleben.']
+ ];
+ sections.forEach(([heading,...paragraphs])=>{const section=el('section','tafsir-section');section.append(el('h4','',heading));paragraphs.forEach(t=>section.append(el('p','',t)));panel.append(section)});
+ const sources=el('section','tafsir-sources');sources.append(el('h4','','📚 Tafsirquellen und Literatur'));
+ const list=el('ul','source-list');
+ [['Ibn Kathir','Tafsir al-Qur’an al-Azim','Sure Al-Fatiha, Vers 3'],['Al-Qurtubi','Al-Jami li-Ahkam al-Qur’an','Auslegung zu Al-Fatiha 1:3, zitiert bei Ibn Kathir'],['At-Tafsir al-Muyassar','','Sure Al-Fatiha 1:3']].forEach(([author,work,reference])=>{const li=el('li');li.append(el('strong','',author),document.createTextNode(work?', '+work:''),document.createTextNode(', '+reference+'.'));list.append(li)});
+ sources.append(list,el('p','source-caveat','Fundstellen nach Sure und Vers angegeben. Band- und Seitenzahlen sind ausgabenabhängig; diese Quellen wurden nicht unabhängig verifiziert.'));panel.append(sources);
 }else{panel.append(el('div',v.tafsir?'':'placeholder',v.tafsir||'Für diesen Vers wurde noch kein Tafsir in der hochgeladenen Word-Datei gefunden.'));}btn.addEventListener('click',()=>{if(panel.hidden && hp){hp.hidden=true;hbtn.setAttribute('aria-expanded','false');hbtn.textContent='📜 Hadithe 1:1 anzeigen';}panel.hidden=!panel.hidden;btn.setAttribute('aria-expanded',String(!panel.hidden));btn.textContent=panel.hidden?'📖 Tafsir '+v.id+' anzeigen':'📕 Tafsir '+v.id+' schließen'});a.append(panel);
 if(v.id==='1:1'){
  hbtn=el('button','action','📜 Hadithe 1:1 anzeigen');hbtn.type='button';hbtn.setAttribute('aria-expanded','false');hbtn.setAttribute('aria-controls','hadith-1-1');actions.append(hbtn);
@@ -80,6 +92,16 @@ if(v.id==='1:2'){
  entries.forEach(e=>{const c=el('section','hadith-card');c.append(el('h4','',e.title),el('p','',e.intro),el('p','hadith-quote',e.quote));if(e.after)c.append(el('p','',e.after));const n=el('p','hadith-source');n.append(el('strong','','Überlieferer: '),document.createTextNode(e.narrator));c.append(n);const src=el('p','hadith-source');src.append(el('strong','','Quelle: '),document.createTextNode(e.source));c.append(src,el('span','hadith-grade','Sahih (authentisch)'));const lesson=el('p','hadith-lesson');lesson.append(el('strong','','Die Lehre: '),document.createTextNode(e.lesson));c.append(lesson);hp.append(c)});
 }
 
+if(v.id==='1:3'){
+ hp=el('section','hadith-panel');hp.hidden=true;hp.append(el('h3','','Hadithe über Allahs Barmherzigkeit · 1:3'));
+ const entries=[
+ {title:'Hadith 1 – Allahs Barmherzigkeit überwiegt Seinen Zorn',intro:'Abu Huraira (r.a.) überliefert, dass der Prophet Muhammad ﷺ berichtete: Als Allah die Schöpfung erschuf, schrieb Er in Seinem Buch, das bei Ihm ist:',quote:'„Meine Barmherzigkeit überwiegt Meinen Zorn.“',source:'Imam Muslim ibn al-Hajjaj, Sahih Muslim, Buch 50: Kitab at-Tawba (Buch der Reue), Kapitel 4: Die Weite der Barmherzigkeit Allahs, Hadith Nr. 2751a, buchinterne Nr. 17.',narrator:'Abu Huraira (r.a.)',lesson:'Allahs Barmherzigkeit ist gewaltig. Auch wenn wir Fehler begehen, dürfen wir uns Ihm mit aufrichtiger Reue zuwenden. Ein Mensch, der gesündigt hat, soll nicht denken, dass für ihn keine Hoffnung mehr besteht. Das bedeutet jedoch nicht, dass wir absichtlich sündigen und uns auf Allahs Vergebung verlassen dürfen, ohne bereuen zu wollen.'},
+ {title:'Hadith 2 – Allahs Barmherzigkeit besteht aus hundert Teilen',intro:'Abu Huraira (r.a.) berichtet, dass der Prophet Muhammad ﷺ sinngemäß sagte: Allah erschuf die Barmherzigkeit in hundert Teilen. Einen Teil ließ Er auf die Erde gelangen. Durch diesen einen Teil zeigen Menschen und Tiere einander Liebe, Zuneigung und Mitgefühl. Sogar ein Tier hebt seinen Huf über sein Junges, damit es dieses nicht verletzt. Die übrigen neunundneunzig Teile behielt Allah für den Tag der Auferstehung zurück.',source:'Imam Muslim, Sahih Muslim, Buch 50: Kitab at-Tawba, Kapitel 4: Die Weite der Barmherzigkeit Allahs, Hadith Nr. 2752a, buchinterne Nr. 20.',narrator:'Abu Huraira (r.a.)',lesson:'Stell dir die Liebe einer Mutter zu ihrem Kind vor, die Zuneigung zwischen Ehepartnern oder das Mitgefühl, das Menschen füreinander empfinden. All diese Barmherzigkeit gehört nach diesem Hadith zu jenem einen Teil, den Allah unter Seinen Geschöpfen verteilt hat. Wie gewaltig muss dann erst Allahs Barmherzigkeit sein, die Er für das Jenseits aufbewahrt hat? Dieser Hadith soll unsere Hoffnung auf Allah stärken und uns gleichzeitig dazu bewegen, selbst barmherzig zu handeln.'},
+ {title:'Hadith 3 – Allah ist barmherziger als eine Mutter zu ihrem Kind',intro:'Umar ibn al-Khattab (r.a.) berichtet von einer Begebenheit aus dem Leben des Propheten ﷺ. Eine Frau suchte unter einer Gruppe von Gefangenen verzweifelt nach ihrem Kind. Als sie es fand, nahm sie es sofort an ihre Brust und stillte es. Der Prophet ﷺ fragte seine Gefährten sinngemäß: „Glaubt ihr, dass diese Frau ihr Kind ins Feuer werfen würde?“ Die Gefährten antworteten, dass sie dies niemals tun würde, solange sie es verhindern könnte. Darauf erklärte der Prophet ﷺ:',quote:'Allah ist zu Seinen Dienern noch barmherziger als diese Frau zu ihrem Kind.',source:'Imam al-Bukhari, Sahih al-Bukhari, Buch 78: Kitab al-Adab (Gutes Benehmen), Kapitel 18: Barmherzigkeit gegenüber Kindern, Hadith Nr. 5999, buchinterne Nr. 30.',narrator:'Umar ibn al-Khattab (r.a.)',lesson:'Der Prophet ﷺ nutzte eine alltägliche, emotional berührende Situation, um seinen Gefährten Allahs Barmherzigkeit verständlich zu machen. Wenn wir sehen, wie sehr Eltern ihre Kinder lieben, können wir dadurch einen kleinen Eindruck von der gewaltigen Barmherzigkeit Allahs gewinnen. Gleichzeitig erinnert uns dieser Hadith daran, selbst liebevoll, fürsorglich und geduldig mit unseren Kindern umzugehen.'}
+ ];
+ entries.forEach(e=>{const c=el('section','hadith-card');c.append(el('h4','',e.title),el('p','',e.intro));if(e.quote)c.append(el('p','hadith-quote',e.quote));const n=el('p','hadith-source');n.append(el('strong','','Überlieferer: '),document.createTextNode(e.narrator));c.append(n);const source=el('p','hadith-source');source.append(el('strong','','Quelle: '),document.createTextNode(e.source));c.append(source,el('span','hadith-grade','Sahih (authentisch)'));const lesson=el('p','hadith-lesson');lesson.append(el('strong','','Die Lehre: '),document.createTextNode(e.lesson));c.append(lesson);hp.append(c)});
+}
+
 // Zweisprachige Tafsir- und Hadith-Reiter. Je Vers ist maximal ein Reiter offen.
 {
  const makeSection=(parent,heading,paragraphs)=>{const section=el('section','tafsir-section');section.append(el('h4','',heading));paragraphs.forEach(t=>section.append(el('p','',t)));parent.append(section)};
@@ -100,8 +122,22 @@ if(v.id==='1:2'){
  makeSection(tafsirTR,'Rabbil-Âlemîn · رَبِّ الْعَالَمِينَ',['“Âlemlerin Rabbi” demektir.','“Rabb” kelimesi Allah’ı yaratan, sahip olan, koruyup yaşatan, rızık veren ve yaratılışı yöneten olarak anlatır.','“Âlemîn” insanlar, cinler, melekler ve Allah’ın yarattığı bütün varlıklar dâhil çeşitli âlemleri kapsar.']);
  makeSection(tafsirTR,'Daha derin anlamı',['Biz Allah’a aidiz, O’nun rızkına muhtacız ve O’nun hükümranlığı altındayız. Sahip olduğumuz ya da başardığımız hiçbir şey O’ndan bağımsız değildir.']);
  makeSources(tafsirTR,[['İbn Kesîr (ö. 774 H.)','Tefsîrü’l-Kur’âni’l-Azîm','Fâtiha 1:2 tefsiri'],['Taberî (ö. 310 H.)','Câmiu’l-Beyân an Te’vîli Âyi’l-Kur’ân','Fâtiha 1:2 tefsiri']],'Kaynaklar gönderilen bilgilere göre verilmiştir; belirli baskı ve sayfa numaraları belirtilmemiş ve bağımsız olarak doğrulanmamıştır.');
- }else{tafsirTR.append(el('p','placeholder','Bu ayet için Türkçe tefsir henüz eklenmedi.'))}
- const hadithTR=el('section','hadith-panel');hadithTR.hidden=true;hadithTR.lang='tr';hadithTR.append(el('h3','',v.id==='1:2'?'Hamd ile ilgili hadisler · 1:2':'Besmele ile ilgili hadisler · 1:1'));
+ }else if(v.id==='1:3'){
+ tafsirTR.append(el('p','tafsir-intro','Bu ayette Allah, en güzel isimlerinden ikisiyle Kendini tanıtır: Er-Rahmân ve Er-Rahîm. Her iki isim de merhamet anlamındaki “rahmet” kökünden gelir; ancak rahmetinin farklı yönlerini vurgular.'));
+ makeSection(tafsirTR,'Er-Rahmân (الرَّحْمَٰنِ) · Sonsuz merhamet sahibi',['Bu isim, Allah’ın bütün yaratılmışları kuşatan geniş ve sınırsız rahmetini anlatır.','Allah insanlara ve hayvanlara hayat, yiyecek, su, sağlık ve rızık verir. Dünyadaki nimetleri hem inananlara hem de inanmayanlara ulaşır.']);
+ makeSection(tafsirTR,'Er-Rahîm (الرَّحِيمِ) · Çok merhamet eden',['Bu isim, Allah’ın merhametini kullarına gösterdiğini ifade eder.','Birçok âlim, Er-Rahîm isminin özellikle müminlere yönelik özel rahmeti, bilhassa ahiretteki rahmeti vurguladığını belirtir.']);
+ makeSection(tafsirTR,'Daha derin anlamı',['Allah yalnızca güçlü Yaratıcı ve âlemlerin Rabbi değil, aynı zamanda sonsuz merhamet sahibidir.','O’nun hükümranlığı kusursuz hikmet ve adalete dayanır. Merhameti, hata yaptığımızda veya zor dönemlerden geçtiğimizde bile bize umut verir.']);
+ makeSources(tafsirTR,[['İbn Kesîr','Tefsîrü’l-Kur’âni’l-Azîm','Fâtiha 1:3'],['Kurtubî','el-Câmi‘ li-Ahkâmi’l-Kur’ân','Fâtiha 1:3 açıklaması; İbn Kesîr’de aktarılmıştır'],['et-Tefsîrü’l-Müyesser','', 'Fâtiha 1:3']],'Kaynaklar sure ve ayete göre belirtilmiştir. Cilt ve sayfa numaraları baskıya göre değişir; bilgiler bağımsız olarak doğrulanmamıştır.');
+}else{tafsirTR.append(el('p','placeholder','Bu ayet için Türkçe tefsir henüz eklenmedi.'))}
+ const hadithTR=el('section','hadith-panel');hadithTR.hidden=true;hadithTR.lang='tr';hadithTR.append(el('h3','',v.id==='1:3'?'Allah’ın rahmetiyle ilgili hadisler · 1:3':(v.id==='1:2'?'Hamd ile ilgili hadisler · 1:2':'Besmele ile ilgili hadisler · 1:1')));
+ if(v.id==='1:3'){
+ const entriesTR=[
+ {title:'Hadis 1 – Allah’ın rahmeti gazabını geçer',intro:'Ebû Hüreyre (r.a.), Peygamberimiz Muhammed’in ﷺ şöyle haber verdiğini rivayet eder: Allah mahlûkatı yarattığında, katında bulunan kitabına şöyle yazdı:',quote:'“Rahmetim gazabımı geçmiştir.”',source:'İmam Müslim b. el-Haccâc, Sahih Müslim, 50. kitap: Kitâbü’t-Tevbe, 4. bölüm: Allah’ın rahmetinin genişliği, hadis no. 2751a, kitap içi no. 17.',narrator:'Ebû Hüreyre (r.a.)',lesson:'Allah’ın rahmeti çok büyüktür. Hata yapsak da samimi bir tövbeyle O’na yönelebiliriz. Günah işleyen bir insan kendisi için artık hiç umut kalmadığını düşünmemelidir. Ancak bu, tövbe etmeye niyet etmeden bilerek günah işlemeyi ve Allah’ın affına güvenmeyi haklı çıkarmaz.'},
+ {title:'Hadis 2 – Allah’ın rahmeti yüz parçadır',intro:'Ebû Hüreyre (r.a.), Peygamberimizin ﷺ anlam olarak şöyle buyurduğunu aktarır: Allah rahmeti yüz parçaya ayırdı. Bunlardan birini yeryüzüne indirdi. İnsanlar ve hayvanlar bu bir parça sayesinde birbirlerine sevgi, şefkat ve merhamet gösterirler. Hatta bir hayvan, yavrusuna zarar vermemek için ayağını kaldırır. Allah geri kalan doksan dokuz parçayı kıyamet günü için saklamıştır.',source:'İmam Müslim, Sahih Müslim, 50. kitap: Kitâbü’t-Tevbe, 4. bölüm: Allah’ın rahmetinin genişliği, hadis no. 2752a, kitap içi no. 20.',narrator:'Ebû Hüreyre (r.a.)',lesson:'Bir annenin çocuğuna duyduğu sevgiyi, eşler arasındaki yakınlığı veya insanların birbirlerine gösterdiği merhameti düşün. Bu hadise göre bütün bu merhamet, Allah’ın yarattıkları arasında paylaştırdığı tek bir parçaya dahildir. Ahiret için sakladığı rahmetin büyüklüğünü düşün! Bu hadis Allah’a olan umudumuzu güçlendirmeli ve bizi de merhametli davranmaya yöneltmelidir.'},
+ {title:'Hadis 3 – Allah kullarına, bir annenin çocuğuna duyduğu merhametten daha merhametlidir',intro:'Ömer b. el-Hattâb (r.a.), Peygamberimizin ﷺ hayatından bir olayı anlatır. Bir kadın esirler arasında çocuğunu telaşla arıyordu. Onu bulunca hemen bağrına basıp emzirdi. Peygamberimiz ﷺ sahabilerine anlam olarak “Bu kadının çocuğunu ateşe atacağını düşünür müsünüz?” diye sordu. Sahabiler, engelleyebildiği sürece bunu asla yapmayacağını söylediler. Bunun üzerine Peygamberimiz ﷺ şöyle açıkladı:',quote:'Allah, kullarına bu kadının çocuğuna duyduğu merhametten daha merhametlidir.',source:'İmam Buhârî, Sahih Buhârî, 78. kitap: Kitâbü’l-Edeb (Güzel Ahlâk), 18. bölüm: Çocuklara merhamet, hadis no. 5999, kitap içi no. 30.',narrator:'Ömer b. el-Hattâb (r.a.)',lesson:'Peygamberimiz ﷺ, Allah’ın merhametini sahabilerine anlatmak için günlük hayattan duygulandırıcı bir olay kullandı. Anne babaların çocuklarına sevgisi, Allah’ın büyük merhametini anlamamıza küçük bir örnek olabilir. Aynı zamanda bu hadis çocuklarımıza karşı sevgi dolu, şefkatli ve sabırlı olmamızı hatırlatır.'}
+ ];
+ entriesTR.forEach(e=>{const c=el('section','hadith-card');c.append(el('h4','',e.title),el('p','',e.intro));if(e.quote)c.append(el('p','hadith-quote',e.quote));const n=el('p','hadith-source');n.append(el('strong','','Rivayet eden: '),document.createTextNode(e.narrator));c.append(n);const src=el('p','hadith-source');src.append(el('strong','','Kaynak: '),document.createTextNode(e.source));c.append(src,el('span','hadith-grade','Sahih (sahih)'));const lesson=el('p','hadith-lesson');lesson.append(el('strong','','Çıkarılacak ders: '),document.createTextNode(e.lesson));c.append(lesson);hadithTR.append(c)});
+ }
  if(v.id==='1:2'){
  const entriesTR=[
  {title:'Hadis 1 – Fâtiha okurken Allah bize cevap verir',intro:'Ebû Hüreyre (r.a.), Peygamberimiz Muhammed ﷺ tarafından aktarılan kudsî bir hadisi rivayet eder. Allah, namazı Kendisi ile kulu arasında paylaştırdığını bildirir. Kul “Elhamdülillâhi Rabbilâlemîn” dediğinde Allah şöyle buyurur:',quote:'“Kulum Bana hamdetti.”',after:'Hadisin devamında Allah’ın Fâtiha’nın diğer ayetlerine nasıl karşılık verdiği anlatılır.',source:'İmam Müslim b. el-Haccâc, Sahih Müslim, Kitâbü’s-Salât, 4. kitap, hadis no. 395a, kitap içi no. 41.',narrator:'Ebû Hüreyre (r.a.)',lesson:'Namazda Fâtiha’yı okurken yalnızca ezberlenmiş sözleri tekrarlamayız. Bu hadis, namazımızın Allah ile aramızdaki özel bağı gösterdiğini anlatır. Biz Allah’a hamd ederiz; Allah da bu hamdi kabul edip över. Bu nedenle Fâtiha’yı yavaş, bilinçli ve anlamını düşünerek okumalıyız.'},
@@ -129,7 +165,7 @@ if(v.id==='1:2'){
  if(hp){addTab(hadCol,'📜 Hadithe '+v.id+' Deutsch',hp,'📜 Hadithe '+v.id+' schließen');addTab(hadCol,'📜 Hadisler '+v.id+' Türkçe',hadithTR,'📜 Hadisler '+v.id+' kapat')}
 
  // Spirituelle Bedeutung / Manevi anlam: deutsch und türkisch, nur für 1:1 und 1:2.
- if(v.id==='1:1'||v.id==='1:2'){
+ if(v.id==='1:1'||v.id==='1:2'||v.id==='1:3'){
   const spiritCol=el('div','language-column');
   const spiritDE=el('section','tafsir spiritual-panel');spiritDE.hidden=true;spiritDE.lang='de';
   const spiritTR=el('section','tafsir spiritual-panel');spiritTR.hidden=true;spiritTR.lang='tr';
@@ -156,6 +192,29 @@ if(v.id==='1:2'){
    spiritTR.append(el('p','','Ardından besmele gelir; kişi böylece bilinçli olarak Allah’a yönelir.'));
    makeSection(spiritTR,'Çıkarılacak ders',['Yalnızca sözlerimiz değil, niyetlerimiz de temiz olmalıdır.']);
    makeSection(spiritTR,'Kaynak',['İsmail Hakkı Bursevî, Rûhu’l-Beyân, 1. cilt, s. 6 (bilgi gönderilen kaynak metninden alınmıştır; ilgili baskı doğrulanmamıştır).']);
+  }else if(v.id==='1:3'){
+   makeSection(spiritDE,'Warum folgt die Barmherzigkeit auf „Rabbil-Alamin“?',[
+    'Warum erwähnt Allah Seine Barmherzigkeit unmittelbar nach „Rabbil-Alamin“, dem Herrn der Welten?',
+    'Der Gelehrte Al-Qurtubi erklärt sinngemäß: Nachdem Allah sich als Herr der Welten vorgestellt hat, erinnert Er uns an Seine Barmherzigkeit.',
+    'Der Begriff „Rabb“ erinnert uns an Allahs Herrschaft und unsere Verantwortung gegenüber Ihm.',
+    'Die Namen „Ar-Rahman“ und „Ar-Rahim“ schenken uns Hoffnung auf Seine Güte und Vergebung.'
+   ]);
+   makeSection(spiritDE,'Die Lehre',[
+    'Ein Gläubiger soll Allah mit Ehrfurcht begegnen, aber niemals die Hoffnung auf Seine Barmherzigkeit verlieren.',
+    'Wir sollen weder glauben, dass unsere Fehler bedeutungslos sind, noch denken, dass Allah uns wegen unserer Sünden niemals vergeben könnte.'
+   ]);
+   makeSection(spiritDE,'Einordnung',['Sinngemäße Wiedergabe einer Al-Qurtubi zugeschriebenen Erklärung aus dem bereitgestellten Text; genaue Fundstelle nicht verifiziert.']);
+   makeSection(spiritTR,'Rahmet neden “Rabbil-Âlemîn” ifadesinin hemen ardından gelir?',[
+    'Allah neden âlemlerin Rabbi olduğunu bildirdikten hemen sonra rahmetini anıyor?',
+    'Âlim Kurtubî’nin açıklamasının anlamı şöyledir: Allah kendisini âlemlerin Rabbi olarak tanıttıktan sonra bize merhametini hatırlatır.',
+    '“Rabb” kelimesi Allah’ın hükümranlığını ve O’na karşı sorumluluğumuzu hatırlatır.',
+    '“Er-Rahmân” ve “Er-Rahîm” isimleri ise O’nun iyiliğine ve bağışlamasına dair bize umut verir.'
+   ]);
+   makeSection(spiritTR,'Çıkarılacak ders',[
+    'Mümin, Allah’a saygı ve haşyetle yaklaşmalı; fakat O’nun rahmetinden asla ümit kesmemelidir.',
+    'Ne hatalarımızı önemsiz görmeliyiz ne de günahlarımız yüzünden Allah’ın bizi asla affetmeyeceğini düşünmeliyiz.'
+   ]);
+   makeSection(spiritTR,'Kaynak notu',['Gönderilen metindeki Kurtubî’ye atfedilen açıklamanın anlam çevirisidir; kesin kaynak yeri bağımsız olarak doğrulanmamıştır.']);
   }else{
    makeSection(spiritDE,'Lob, Dankbarkeit und Nähe zu Allah',[
     'Allah beginnt die Al-Fatiha mit Seinem Lob.',
